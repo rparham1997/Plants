@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+enum PlantLevel: String {
+    case easy, difficult
+}

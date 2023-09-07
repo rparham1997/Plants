@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+class HomeViewModel: ObservableObject {
+    @Published var categories = PlantService.instance.getPlantCategories()
+    @Published var plants = PlantService.instance.getPlants().filter {
+        $0.showOnHomeScreen
+    }
+    @Published var selectedPlant: Plant? = nil
+}

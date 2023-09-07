@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject private var vm = HomeViewModel()
     @State private var searchTxt = ""
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 20) {
             HStack {
                 Image.MenuIcon
                 Spacer()
@@ -36,6 +37,35 @@ struct HomeView: View {
             
             Text("Plant Category")
                 .withHeadingFormat()
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(vm.categories) { category in
+                        PlantCategoryView(category: category)
+                    }
+                }
+            }
+            
+            Text("Popular Plant")
+                .withHeadingFormat()
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(vm.plants) { plant in
+                        PopularPlantView(plant: plant)
+                            .onTapGesture {
+                                vm.selectedPlant = plant
+                            }
+                    }
+                }
+            }
+            
+            Spacer()
+            
+        }
+        .padding()
+        .fullScreenCover(item: $vm.selectedPlant) { plant in
+            DetailView(plant: plant)
         }
     }
 }

@@ -5,9 +5,10 @@
 //  Created by Ramar Parham on 9/5/23.
 //
 
-import SwiftUi
+import SwiftUI
 
 struct PlantCategory: Identifiable {
-    let id = UUID().uuid
+    let id = UUID().uuidString
     let image: Image
+    let name: String 
 }

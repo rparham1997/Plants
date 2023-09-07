@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+enum PlantSize: String {
+    case small, medium, large
+}
